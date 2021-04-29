@@ -18,9 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 import models.commande;
 import services.servicecommande;
+import utils.JavaMailUtil;
 
 /**
  * FXML Controller class
@@ -47,7 +49,7 @@ public class AjoutCommandeController implements Initializable {
     }    
 
     @FXML
-    private void AjouterCommande(ActionEvent event) throws IOException {
+    private void AjouterCommande(ActionEvent event) throws IOException, MessagingException {
         servicecommande sc;
         sc = new servicecommande();
         sc.ajouter(new commande(tfRef.getText() ,tfEtat.getText() ));
@@ -61,7 +63,7 @@ public class AjoutCommandeController implements Initializable {
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
-
+JavaMailUtil.sendMail("heni.guirat2@gmail.com");
     }
     
 }
