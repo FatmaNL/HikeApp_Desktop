@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MotdepasseoublieController">
+   <children>
+      <Label fx:id="r" alignment="CENTER" layoutX="103.0" layoutY="162.0" text="TAPEZ LE CODE ENVOYER PAR EMAIL:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnenvoyer" layoutX="189.0" layoutY="350.0" mnemonicParsing="false" onAction="#envoyer" style="-fx-background-color: #1676b1;" text="Envoyer" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tfcode" layoutX="207.0" layoutY="235.0" promptText="Code" />
+      <Button fx:id="btnannuler" layoutX="319.0" layoutY="350.0" mnemonicParsing="false" onAction="#annuler" style="-fx-background-color: #1676b1;" text="Annuler" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
