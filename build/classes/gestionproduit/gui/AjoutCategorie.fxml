@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionproduit.gui.AjoutCategorieController">
+   <children>
+      <HBox prefHeight="49.0" prefWidth="334.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Categorie">
+               <font>
+                  <Font name="Berlin Sans FB" size="27.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="8.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" wrappingWidth="100.13671875">
+               <font>
+                  <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="nomfld" prefHeight="25.0" prefWidth="342.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <children>
+            <JFXButton alignment="CENTER" onMouseClicked="#ajouter" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #00E676;" text="Ajouter">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="123.0" layoutY="38.0" onMouseClicked="#clear" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFF00;" text="Reset">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>
