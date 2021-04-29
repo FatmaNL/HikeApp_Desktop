@@ -65,9 +65,12 @@ public class AddTransportController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private Button btnExporter;
+    @FXML
+    private TextField tfid;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -75,6 +78,7 @@ public class AddTransportController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Transport t = tableview.getSelectionModel().getSelectedItem();
         showTransport();
+        tfid.setDisable(true);
     }
 
     @FXML
@@ -105,10 +109,11 @@ public class AddTransportController implements Initializable {
         colType.setCellValueFactory(new PropertyValueFactory<Transport, String>("type"));
         colVolume.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("volumemax"));
         colNbTransports.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("nombre_transports"));
+        //colid.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("idransport"));
 
         ObservableList<Transport> dataList;
         ServiceTransport ser = new ServiceTransport();
-        dataList = ser.getTransportList();
+        dataList = ser.getList();
 
         tableview.setItems(dataList);
 
@@ -117,14 +122,14 @@ public class AddTransportController implements Initializable {
     public void showTransport() {
         ServiceTransport ser = new ServiceTransport();
 
-        ObservableList<Transport> list = ser.getTransportList();
+        ObservableList<Transport> list = ser.getList();
         colType.setCellValueFactory(new PropertyValueFactory<Transport, String>("type"));
-
         colVolume.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("volumemax"));
         colNbTransports.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("nombre_transports"));
+        //colid.setCellValueFactory(new PropertyValueFactory<Transport, Integer>("idransport"));
         tableview.setItems(list);
-        FilteredList<Transport> filteredData = new FilteredList<>(list, b -> true);
 
+        FilteredList<Transport> filteredData = new FilteredList<>(list, b -> true);
         tfrechercher.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             filteredData.setPredicate((Transport cattype) -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -168,7 +173,6 @@ public class AddTransportController implements Initializable {
 
             } else {
                 ServiceTransport sc = new ServiceTransport();
-                String type = t.getType();
                 try {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Modifier Transport ..");
@@ -176,13 +180,13 @@ public class AddTransportController implements Initializable {
                     alert.setContentText("Etes-vous sûr que vous voulez modifier! " + t.getType());
                     Optional<ButtonType> action = alert.showAndWait();
                     if (action.get() == ButtonType.OK) {
-                        // System.out.println("sup1");
                         t.setType(tfType.getText());
                         t.setVolumemax(parseInt(tfVolume.getText()));
                         t.setNombre_transports(parseInt(tfNbTransports.getText()));
 
                         sc.modifier(t);
-
+                        
+                        showTransport();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -193,13 +197,16 @@ public class AddTransportController implements Initializable {
         }
     }
 
+    @FXML
     private void selected(javafx.scene.input.MouseEvent event) {
+
         Transport t = tableview.getSelectionModel().getSelectedItem();
 
         tfType.setText(t.getType());
         tfVolume.setText(String.valueOf(t.getVolumemax()));
         tfNbTransports.setText(String.valueOf(t.getNombre_transports()));
-
+        tfid.setText(String.valueOf(t.getId()));
+        System.out.println("id = " + t.getId() + " type= " + t.getType());
     }
 
     @FXML
@@ -233,14 +240,11 @@ public class AddTransportController implements Initializable {
 
         } else {
             ServiceTransport sc = new ServiceTransport();
-            String type = t.getType();
-            Integer volumemax = t.getVolumemax();
-            Integer nbtransports = t.getNombre_transports();
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Supprimer Transport ..");
                 alert.setHeaderText(null);
-                alert.setContentText("Etes-vous sûr que vous voulez supprimer! " + t.getType());
+                alert.setContentText("Etes-vous sûr que vous voulez supprimer " + t.getType() + "?");
                 Optional<ButtonType> action = alert.showAndWait();
                 if (action.get() == ButtonType.OK) {
                     sc.supprimer(t);

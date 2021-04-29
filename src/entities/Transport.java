@@ -10,13 +10,13 @@ package entities;
  * @author Fatma NL
  */
 public class Transport {
-    private int id;
+    private int idtransport;
     private String type;
     private int volumemax;
     private int nombre_transports;
     
     public Transport(int id, String type, int volumemax, int nombre_transports){
-        this.id=id;
+        this.idtransport=id;
         this.type=type;
         this.volumemax=volumemax;
         this.nombre_transports=nombre_transports;
@@ -29,11 +29,11 @@ public class Transport {
     }
 
     public int getId() {
-        return id;
+        return idtransport;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idtransport = id;
     }
 
     public String getType() {
@@ -62,7 +62,7 @@ public class Transport {
 
     @Override
     public String toString() {
-        return "Transport{" + "id=" + id + ", type=" + type + ", volumemax=" + volumemax + ", nombre_transports=" + nombre_transports + '}';
+        return "Transport{" + "id=" + idtransport + ", type=" + type + ", volumemax=" + volumemax + ", nombre_transports=" + nombre_transports + '}';
     }
 
     public Transport() {

@@ -10,7 +10,7 @@ package entities;
  * @author Fatma NL
  */
 public class Sentier {
-    private int id;
+    private int idsentier;
     private String nomsentier;
     private String duree;
     private String distance;
@@ -22,7 +22,7 @@ public class Sentier {
     }
 
     public Sentier(int id, String nomsentier, String duree, String distance, String difficulte, String departsentier, String destinationsentier) {
-        this.id = id;
+        this.idsentier = id;
         this.nomsentier = nomsentier;
         this.duree = duree;
         this.distance = distance;
@@ -41,11 +41,11 @@ public class Sentier {
     }
 
     public int getId() {
-        return id;
+        return idsentier;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idsentier = id;
     }
 
     public String getNomsentier() {

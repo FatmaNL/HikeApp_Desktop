@@ -18,7 +18,7 @@ public class testapp {
         //DataSource ds = DataSource.getInstance();
         ServiceTransport t = new ServiceTransport();
         t.ajouter(new Transport("trtest", 28,1));
-        t.getTransportList().forEach(System.out::println);
+        t.getList().forEach(System.out::println);
     }
     
 }

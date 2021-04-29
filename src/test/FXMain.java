@@ -25,11 +25,11 @@ public class FXMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/AddTransport.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/Evenement.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Ajout Transport");
+        //primaryStage.setTitle("Ajout Transport");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

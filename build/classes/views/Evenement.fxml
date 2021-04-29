@@ -1,22 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EvenementController">
    <children>
-      <Label layoutX="52.0" layoutY="50.0" text="Nom:" />
-      <Label layoutX="52.0" layoutY="84.0" text="Départ:" />
-      <Label layoutX="52.0" layoutY="122.0" text="Destination:" />
-      <Label layoutX="52.0" layoutY="162.0" text="Nombre des Participants " />
-      <Label layoutX="52.0" layoutY="200.0" text="Date:" />
-      <Label layoutX="52.0" layoutY="238.0" text="Durée:" />
-      <Label layoutX="52.0" layoutY="268.0" text="Prix:" />
-      <Label layoutX="52.0" layoutY="301.0" text="Programme:" />
-      <Label layoutX="52.0" layoutY="339.0" text="Contact:" />
-      <Label layoutX="52.0" layoutY="376.0" text="Infos:" />
-      <Label layoutX="52.0" layoutY="414.0" text="Type:" />
-      <Label layoutX="52.0" layoutY="448.0" text="Circuit:" />
+      <VBox layoutX="32.0" layoutY="29.0" prefHeight="227.0" prefWidth="138.0" spacing="25.0">
+         <children>
+            <Label text="Nom:" />
+            <Label text="Départ:" />
+            <Label text="Destination:" />
+            <Label text="Nombre des Participants:" />
+            <Label text="Date:" />
+            <Label text="Durée:" />
+         </children>
+      </VBox>
+      <VBox layoutX="483.0" layoutY="29.0" prefHeight="200.0" prefWidth="70.0" spacing="25.0">
+         <children>
+            <Label text="Prix:" />
+            <Label text="Contact:" />
+            <Label text="Infos:" />
+            <Label text="Type:" />
+            <Label text="Circuit:" />
+         </children>
+      </VBox>
+      <VBox layoutX="170.0" layoutY="29.0" prefHeight="200.0" prefWidth="100.0" spacing="16.0">
+         <children>
+            <TextField fx:id="tfNom" />
+            <TextField fx:id="tfDepart" />
+            <TextField fx:id="tfDestination" />
+            <TextField fx:id="tfParticipants" />
+            <TextField fx:id="tfDate" />
+            <TextField fx:id="tfDuree" />
+         </children>
+      </VBox>
+      <VBox layoutX="564.0" layoutY="30.0" prefHeight="184.0" prefWidth="100.0" spacing="12.0">
+         <children>
+            <TextField fx:id="tfPrix" />
+            <TextField fx:id="tfContact" />
+            <TextArea fx:id="taInfos" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="tfType" />
+            <TextField fx:id="tfCircuit" />
+         </children>
+      </VBox>
+      <TextArea fx:id="taProgramme" layoutX="170.0" layoutY="285.0" prefHeight="82.0" prefWidth="244.0" />
+      <Label layoutX="32.0" layoutY="285.0" text="Programme:" />
+      <TableView fx:id="tableview" layoutX="31.0" layoutY="383.0" onMouseClicked="#selected" prefHeight="200.0" prefWidth="903.0">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="75.0" text="Nom" />
+          <TableColumn fx:id="colDepart" prefWidth="75.0" text="Départ" />
+            <TableColumn fx:id="colDestination" prefWidth="75.0" text="Destination" />
+            <TableColumn fx:id="colParticipants" prefWidth="83.0" text="Participants" />
+            <TableColumn fx:id="colDate" prefWidth="52.0" text="Date" />
+            <TableColumn fx:id="colDuree" prefWidth="53.0" text="Durée" />
+            <TableColumn fx:id="colProgramme" prefWidth="113.0" text="Programme" />
+            <TableColumn fx:id="colPrix" prefWidth="52.0" text="Prix" />
+            <TableColumn fx:id="colContact" prefWidth="74.0" text="Contact" />
+            <TableColumn fx:id="colInfos" prefWidth="101.0" text="infos" />
+            <TableColumn fx:id="colType" prefWidth="72.0" text="Type" />
+            <TableColumn fx:id="colCircuit" prefWidth="75.0" text="Circuit" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfRechercher" layoutX="785.0" layoutY="342.0" promptText="Par Nom" />
+      <Button fx:id="btnAjouter" layoutX="754.0" layoutY="84.0" mnemonicParsing="false" onAction="#AjouterEvenement" prefHeight="25.0" prefWidth="133.0" text="Ajouter" />
+      <Button fx:id="btnModifier" layoutX="754.0" layoutY="117.0" mnemonicParsing="false" onAction="#ModifierEvenement" prefHeight="25.0" prefWidth="133.0" text="Modifier" />
+      <Button fx:id="btnSupprimer" layoutX="754.0" layoutY="150.0" mnemonicParsing="false" onAction="#SupprimerEvenement" prefHeight="25.0" prefWidth="133.0" text="Supprimer" />
+      <Button fx:id="btnInviter" layoutX="881.0" layoutY="597.0" mnemonicParsing="false" onAction="#Inviter" text="Inviter " />
+      <Button fx:id="btnExporter" layoutX="772.0" layoutY="597.0" mnemonicParsing="false" onAction="#Exporter" text="Exporter la liste" />
    </children>
 </AnchorPane>

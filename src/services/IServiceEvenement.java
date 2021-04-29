@@ -5,20 +5,18 @@
  */
 package services;
 
-import entities.Transport;
-import java.util.List;
+import entities.Evenement;
 import javafx.collections.ObservableList;
 
 /**
  *
  * @author Fatma NL
- * @param<obj>
+ * @param <obj>
  */
-
-public interface IService<obj> {
+public interface IServiceEvenement<obj> {
     public void ajouter(obj x);
     public void supprimer(obj x);
     public void modifier(obj x);
-    public ObservableList<Transport> getList();
+    public ObservableList<Evenement> getList();
     
 }
