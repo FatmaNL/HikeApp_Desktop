@@ -17,7 +17,7 @@
          </font>
       </Label>
       <AnchorPane layoutX="459.0" layoutY="399.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="btn" layoutX="273.0" layoutY="399.0" mnemonicParsing="false" onAction="#AjouterCommande" prefHeight="56.0" prefWidth="222.0" text="Ajouter" textFill="#008010">
+      <Button fx:id="btn" layoutX="273.0" layoutY="399.0" mnemonicParsing="false" onAction="#AjouterCommande" prefHeight="56.0" prefWidth="222.0" text="Ajouter">
          <font>
             <Font name="Arial Rounded MT Bold" size="30.0" />
          </font>
