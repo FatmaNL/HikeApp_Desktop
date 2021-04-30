@@ -46,5 +46,7 @@
       </VBox>
       <Label layoutX="40.0" layoutY="25.0" text="ID:" />
       <TextField fx:id="tfid" layoutX="128.0" layoutY="21.0" prefHeight="25.0" prefWidth="29.0" />
+      <Button fx:id="btnappliquer" layoutX="598.0" layoutY="361.0" mnemonicParsing="false" onAction="#appliquer" text="Appliquer" />
+      <Button fx:id="btnannuler" layoutX="667.0" layoutY="361.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
    </children>
 </AnchorPane>

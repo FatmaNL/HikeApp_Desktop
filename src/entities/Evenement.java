@@ -23,11 +23,13 @@ public class Evenement {
     private String infos;
     private String type;
     private String circuit;
-
-    public Evenement() {
+    private String image;
+    private int idTransport;
+ 
+   public Evenement() {
     }
 
-    public Evenement(int id, String nomevenement, String depart, String destination, int nbparticipant, String dateevenement, int duree, double prix, String programme, String contact, String infos, String type, String circuit) {
+    public Evenement(int id, String nomevenement, String depart, String destination, int nbparticipant, String dateevenement, int duree, double prix, String programme, String contact, String infos, String type, String circuit, String image, int idTransport) {
         this.id = id;
         this.nomevenement = nomevenement;
         this.depart = depart;
@@ -41,9 +43,11 @@ public class Evenement {
         this.infos = infos;
         this.type = type;
         this.circuit = circuit;
+        this.image = image;
+        this.idTransport = idTransport;
     }
 
-    public Evenement(String nomevenement, String depart, String destination, int nbparticipant, String dateevenement, int duree, double prix, String programme, String contact, String infos, String type, String circuit) {
+    public Evenement(String nomevenement, String depart, String destination, int nbparticipant, String dateevenement, int duree, double prix, String programme, String contact, String infos, String type, String circuit, String image, int idTransport) {
         this.nomevenement = nomevenement;
         this.depart = depart;
         this.destination = destination;
@@ -56,8 +60,10 @@ public class Evenement {
         this.infos = infos;
         this.type = type;
         this.circuit = circuit;
+        this.image = image;
+        this.idTransport = idTransport;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -160,6 +166,22 @@ public class Evenement {
 
     public void setCircuit(String circuit) {
         this.circuit = circuit;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getIdTransport() {
+        return idTransport;
+    }
+
+    public void setIdTransport(int idTransport) {
+        this.idTransport = idTransport;
     }
 
     @Override

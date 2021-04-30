@@ -58,15 +58,15 @@ public class AddTransportController implements Initializable {
     @FXML
     private TextField tfrechercher;
     @FXML
-    private Button btnContacter;
-    @FXML
     private Button btnModifier;
     @FXML
     private Button btnSupprimer;
     @FXML
-    private Button btnExporter;
-    @FXML
     private TextField tfid;
+    @FXML
+    private Button btnappliquer;
+    @FXML
+    private Button btnannuler;
 
     /**
      * Initializes the controller class.
@@ -209,21 +209,7 @@ public class AddTransportController implements Initializable {
         System.out.println("id = " + t.getId() + " type= " + t.getType());
     }
 
-    @FXML
-    private void Mail(ActionEvent event) {
-        try {
-            selectedTransport = (tfType.getText());
-            Stage logp = new Stage();
-            Parent root;
-            root = FXMLLoader.load(getClass().getResource("mailing.fxml"));
-            Scene scene = new Scene(root);
-            logp.setScene(scene);
-            logp.show();
-            logp.setResizable(false);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+   
 
     @FXML
     private void SupprimerTransport(ActionEvent event) {
@@ -251,7 +237,7 @@ public class AddTransportController implements Initializable {
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.setTitle("Supprimer Transport");
                     alert1.setHeaderText(null);
-                    alert1.setContentText("Le Transport est supprimée");
+                    alert1.setContentText("Le Transport est supprimé");
 
                     alert1.showAndWait();
                 }
@@ -264,7 +250,26 @@ public class AddTransportController implements Initializable {
     }
 
     @FXML
-    private void Exporter(ActionEvent event) {
+    private void appliquer(ActionEvent event) {
+        try {
+            //selectedTransport = (tfType.getText());
+            Stage logp = new Stage();
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("Evenement.fxml"));
+            Scene scene = new Scene(root);
+            logp.setScene(scene);
+            logp.show();
+            logp.setResizable(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void annuler(ActionEvent event) {
+        
+            Stage stage = (Stage) btnannuler.getScene().getWindow();
+            stage.close();
     }
 
 }

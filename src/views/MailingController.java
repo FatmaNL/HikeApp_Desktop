@@ -11,8 +11,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -32,6 +34,8 @@ public class MailingController implements Initializable {
     private TextField tfto;
     @FXML
     private TextArea tfmsg;
+    @FXML
+    private Button btnenvoyer;
 
     /**
      * Initializes the controller class.
@@ -74,6 +78,9 @@ public class MailingController implements Initializable {
             message.setText(tfmsg.getText());
             Transport.send(message);
             System.out.println("message envoyé!");
+            
+            Stage stage = (Stage) btnenvoyer.getScene().getWindow();
+            stage.close();
 
         } catch (MessagingException ex) {
             System.out.println(ex);

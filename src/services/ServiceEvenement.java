@@ -48,7 +48,9 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
                 String infos = rs.getString("infos");
                 String type = rs.getString("type");
                 String circuit = rs.getString("circuit");
-                Evenement e = new Evenement(id, nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit);
+                String image = rs.getString("image");
+                int idTransport = rs.getInt("transport_id");
+                Evenement e = new Evenement(id, nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit, image, idTransport);
                 EvenementList.add(e);
             }
         } catch (SQLException ex) {
@@ -61,8 +63,9 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
     @Override
     public void ajouter(Evenement x) {
         try {
-            String requete = "INSERT INTO evenement (nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit) "
-                    + "VALUES ('" + x.getNomevenement()+ "','" + x.getDepart()+ "','" + x.getDestination()+ "','" + x.getNbparticipant()+ "','" + x.getDateevenement()+ "','" + x.getDuree()+  "','" + x.getPrix()+  "','" + x.getProgramme()+  "','" + x.getContact()+  "','" + x.getInfos()+  "','" + x.getType()+  "','" + x.getCircuit()+ "')";
+            String requete = "INSERT INTO evenement (nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit, transport_id) "
+                    + "VALUES ('" + x.getNomevenement()+ "','" + x.getDepart()+ "','" + x.getDestination()+ "','" + x.getNbparticipant()+ "','" + x.getDateevenement()+ "','" + x.getDuree()+  "','" + x.getPrix()+  "','" + x.getProgramme()+  "','" + x.getContact()+  "','" + x.getInfos()+  "','" + x.getType()+  "','" + x.getCircuit()+ "','" + x.getIdTransport()+ "')";
+            
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Evenement ajouté !");
@@ -89,9 +92,9 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
     public void modifier(Evenement x) {
         try {
             String requete = "UPDATE evenement SET nomevenement='" + x.getNomevenement()+ "',depart='" + x.getDepart()+ "',destination='" + x.getDestination()
-                    + "',nbparticipant='" + x.getNbparticipant()+ "',dateevnement='" + x.getDateevenement()+ "',duree='" + x.getDuree()
+                    + "',nbparticipant='" + x.getNbparticipant()+ "',dateevenement='" + x.getDateevenement()+ "',duree='" + x.getDuree()
                     + "',prix='" + x.getPrix()+ "',programme='" + x.getProgramme()+ "',contact='" + x.getContact()+ "',infos='" + x.getInfos()
-                    + "',type='" + x.getType()+ "',circuit='" + x.getCircuit()
+                    + "',type='" + x.getType()+ "',circuit='" + x.getCircuit()+ "',transport_id='" + x.getIdTransport()
                     +"' WHERE id=" + x.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);

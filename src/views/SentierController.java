@@ -15,7 +15,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import services.ServiceSentier;
 
 /**
@@ -70,6 +74,10 @@ public class SentierController implements Initializable {
     private TextField tfDestination;
     @FXML
     private TextField tfid;
+    @FXML
+    private Button btnappliquer;
+    @FXML
+    private Button btnannuler;
 
     /**
      * Initializes the controller class.
@@ -198,7 +206,7 @@ public class SentierController implements Initializable {
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.setTitle("Supprimer Sentier");
                     alert1.setHeaderText(null);
-                    alert1.setContentText("Le Sentier est supprimée");
+                    alert1.setContentText("Le Sentier est supprimé");
 
                     alert1.showAndWait();
                 }
@@ -257,6 +265,28 @@ public class SentierController implements Initializable {
         SortedList<Sentier> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tableview.comparatorProperty());
         tableview.setItems(sortedData);
+    }
+
+    @FXML
+    private void appliquer(ActionEvent event) {
+        try {
+            //selectedTransport = (tfType.getText());
+            Stage logp = new Stage();
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("Evenement.fxml"));
+            Scene scene = new Scene(root);
+            logp.setScene(scene);
+            logp.show();
+            logp.setResizable(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void annuler(ActionEvent event) {
+        Stage stage = (Stage) btnannuler.getScene().getWindow();
+            stage.close();
     }
 
 }
