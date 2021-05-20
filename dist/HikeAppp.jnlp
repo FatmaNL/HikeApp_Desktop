@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="HikeAppp.jar" size="40380" download="eager" />
+    <jar href="HikeAppp.jar" size="40208" download="eager" />
     <jar href="lib\itextpdf-5.3.4.jar" size="1810038" download="eager" />
     <jar href="lib\javax.mail.jar" size="659033" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.19.jar" size="2356711" download="eager" />

@@ -56,11 +56,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import services.ServiceEvenement;
 import services.ServiceSentier;
 import services.ServiceTransport;
-import static views.AddTransportController.selectedTransport;
 
 /**
  * FXML Controller class
@@ -176,6 +176,8 @@ public class EvenementController implements Initializable {
 
         ObservableList<String> listtype = FXCollections.observableArrayList("Randonnee", "Camping");
         tfType.setItems(listtype);
+        
+        
     }
 
     public void listeTrasport() throws SQLException {
@@ -381,12 +383,11 @@ public class EvenementController implements Initializable {
     }
 
     @FXML
-    private void Exporter(ActionEvent event, String dest) throws IOException {
-        FileOutputStream foa = new FileOutputStream(dest);
-        //PdfWriter writer = new PdfWriter(foa);
+    private void Exporter(ActionEvent event) {
         
         
     }
+        
 
     private void search(ActionEvent event) {
         Evenement e = new Evenement();
@@ -512,8 +513,6 @@ public class EvenementController implements Initializable {
             job.printPage(root);
 
             job.endJob();
-
-            JOptionPane.showMessageDialog(null, "imprimer avec succés");
         }
     }
 
