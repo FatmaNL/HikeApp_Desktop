@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestionproduit.gui;
+package gui;
 
 import com.jfoenix.controls.JFXTextField;
-import gestionproduit.models.Categorie;
-import gestionproduit.models.Produit;
+import static com.jfoenix.svg.SVGGlyphLoader.clear;
+import models.Categorie;
 import gestionproduit.utils.DataSource;
 import java.net.URL;
 import java.sql.Connection;
@@ -28,41 +28,32 @@ import javafx.scene.input.MouseEvent;
  *
  * @author LENOVO
  */
-public class AjoutProduitController implements Initializable {
+public class AjoutCategorieController implements Initializable {
 
     @FXML
-    private JFXTextField nomprod;
-    @FXML
-    private JFXTextField quanprod;
-    @FXML
-    private JFXTextField prixprod;
-    @FXML
-    private JFXTextField catprod;
-    
+    private JFXTextField nomfld;
+
     String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    Produit produit = null;
+    Categorie categorie = null;
     private boolean update;
-    int produitId;
-
+    int categorieId;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
     private void ajouter(MouseEvent event) {
-        connection = DataSource.getInstance().getcnx();
-        String name = nomprod.getText();
-        String quantite = quanprod.getText();
-        String prix = prixprod.getText();
-        String categorie =catprod.getText();
-
+         connection = DataSource.getInstance().getcnx();
+        String name = nomfld.getText();
+ 
         if (name.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -79,47 +70,36 @@ public class AjoutProduitController implements Initializable {
 
     @FXML
     private void clear() {
-         nomprod.setText(null);
-          quanprod.setText(null);
-           prixprod.setText(null);
-           catprod.setText(null);
+         nomfld.setText(null);
     }
 
     private void getQuery() {
          if (update == false) {
             
-            query = "INSERT INTO `produit`( `nomproduit`, `quantite`, `prix`, cat_name) VALUES (?,?,?,?)";
+            query = "INSERT INTO `categorie`( `nomcategorie`) VALUES (?)";
 
         }else{
-            query = "UPDATE `produit` SET "
-                    + "`nomproduit`=?,"
-                    + "`quantite`=?,"
-                    + "`prix`=? ,"
-                    +"`cat_name`=? WHERE numproduit = '"+produitId+"'";
+            query = "UPDATE `categorie` SET "
+                    + "`nomcategorie`=? WHERE idcategorie = '"+categorieId+"'";
         }
+
     }
 
     private void insert() {
         try {
 
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, nomprod.getText());
-            preparedStatement.setString(2, quanprod.getText());
-            preparedStatement.setString(3, prixprod.getText());
-            preparedStatement.setString(4, catprod.getText());
+            preparedStatement.setString(1, nomfld.getText());
             preparedStatement.execute();
 
         } catch (SQLException ex) {
-            Logger.getLogger(AjoutProduitController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AjoutCategorieController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     void setTextField(int id, String name,int q,double p) {
+     void setTextField(int id, String name) {
 
-        produitId = id;
-        nomprod.setText(name);
-        quanprod.setText(Integer.toString(q));
-        prixprod.setText(Double.toString(p));
-        
+        categorieId = id;
+        nomfld.setText(name);
      }
      
      void setUpdate(boolean b) {
@@ -127,4 +107,5 @@ public class AjoutProduitController implements Initializable {
 
     }
 
+    
 }

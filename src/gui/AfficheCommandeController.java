@@ -5,13 +5,28 @@
  */
 package gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.mysql.jdbc.PreparedStatement;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +43,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.commande;
 import services.servicecommande;
+import utils.DataSource;
+import utils.generatePdf;
 
 /**
  * FXML Controller class
@@ -44,6 +61,8 @@ public class AfficheCommandeController implements Initializable {
     @FXML
     private TableColumn<commande, Date> dtc;
     ObservableList<commande> List;
+    ObservableList<commande> DataList;
+
     servicecommande scc = new servicecommande();
     @FXML
     private Button supp;
@@ -51,6 +70,9 @@ public class AfficheCommandeController implements Initializable {
     private Button ajt;
           @FXML
     private Button modf;
+           @FXML
+    private Button fac;
+
              @FXML
     private TextField rech;
           
@@ -130,16 +152,19 @@ index = affch.getSelectionModel().getSelectedIndex();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       updatetable();
+      recherche();
         
     }    
 
-    /* public void recherche(){
+     public void recherche(){
         ref.setCellValueFactory(new PropertyValueFactory<commande,String>("refcommande"));  
-    
-        dataliste = cu.afficher();
-        detailsuser.setItems(dataliste);
-        FilteredList<User> filterdata = new FilteredList<>(dataliste, b -> true);
-        tfsearch.textProperty().addListener((observable, oldValue, newValue) -> {
+        etat.setCellValueFactory(new PropertyValueFactory<commande,String>("etat"));  
+        dtc.setCellValueFactory(new PropertyValueFactory<commande,Date>("datecommande"));  
+
+        DataList = scc.afficher();
+        affch.setItems(DataList);
+        FilteredList<commande> filterdata = new FilteredList<>(DataList, b -> true);
+        rech.textProperty().addListener((observable, oldValue, newValue) -> {
             filterdata.setPredicate(person -> {
                                 
                 if (newValue == null || newValue.isEmpty()) {
@@ -148,27 +173,20 @@ index = affch.getSelectionModel().getSelectedIndex();
                 
                 String lowerCaseFilter = newValue.toLowerCase();
                 
-                if (String.valueOf(person.getCin()).toLowerCase().indexOf(lowerCaseFilter ) != -1 ) {
-                    return true; 
-                } else if (person.getPrenom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                if (String.valueOf(person.getRefcommande()).toLowerCase().indexOf(lowerCaseFilter ) != -1 ) {
                     return true; 
                 }
-                else if (person.getNom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true; 
-                }
-                else if(person.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1) 
-                        return true;
                 else
                     return false;
             });
         });
         
          
-        SortedList<User> sortedData = new SortedList<>(filterdata);
-        sortedData.comparatorProperty().bind(detailsuser.comparatorProperty());
-        detailsuser.setItems(sortedData);
+        SortedList<commande> sortedData = new SortedList<>(filterdata);
+        sortedData.comparatorProperty().bind(affch.comparatorProperty());
+        affch.setItems(sortedData);
         
-    }*/
+    }
     public void updatetable() {
           ref.setCellValueFactory(new PropertyValueFactory<commande,String>("refcommande"));
         etat.setCellValueFactory(new PropertyValueFactory<commande,String>("etat"));
@@ -196,6 +214,41 @@ index = affch.getSelectionModel().getSelectedIndex();
   
         ObservableList<commande> ob = FXCollections.observableArrayList(scc.afficheroccasion());
         affch.setItems(ob);
+        
     }
+    @FXML
+    void facture(ActionEvent event) throws FileNotFoundException, DocumentException, SQLException{
+    String file_name="C:\\Users\\Asus\\Desktop\\pdfEXPORTS\\facture.pdf";
+    Document document = new Document();
+       
+    
+
+    
+    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file_name));
+		document.open();
+                
+                
+                //table
+               Connection cnx = DataSource.getInstance().getcnx();
+        
+          
+               String query ="SELECT `refcommande`,`etat`,`datecommande` FROM commande  ";
+               Statement st;
+               ResultSet rs;
+          
+               st = cnx.createStatement();
+               rs = st.executeQuery(query);
+               
+               while (rs.next()) {
+                   Paragraph para = new Paragraph(rs.getString("refcommande")+" "+rs.getString("etat")+" "+rs.getDate("datecommande"));
+                   document.add(para);
+                   document.add(new Paragraph(" "));
+
+               }
+                document.close();
+   
+   
+   }
+    
     
 }

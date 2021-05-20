@@ -4,23 +4,24 @@
  * and open the template in the editor.
  */
 package utils;
+import gestionproduit.utils.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
  *
- * @author Asus
+ * @author LENOVO
  */
-public class DataSource {
-    private static DataSource instance;
+public class DataSource1 {
+    private static DataSource1 instance;
     private Connection cnx;
     
     private final String URL ="jdbc:mysql://localhost:3306/pidev2";
     private final String LOGIN="root";
     private final String PASSWORD="";
     
-    public DataSource(){
+    public DataSource1(){
         try {
             cnx= DriverManager.getConnection(URL, LOGIN, PASSWORD);
             System.out.println("Connected to BD");
@@ -29,10 +30,10 @@ public class DataSource {
         }
         
     }
-    public static DataSource getInstance(){
+    public static DataSource1 getInstance(){
     
         if (instance == null){
-        instance= new DataSource();
+        instance= new DataSource1();
         }
         return instance;
     }
@@ -42,5 +43,4 @@ public class DataSource {
         return cnx;
     }
     
-
 }

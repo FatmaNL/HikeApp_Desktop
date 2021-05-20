@@ -21,5 +21,6 @@
       <Button fx:id="refresh" layoutX="8.0" layoutY="250.0" mnemonicParsing="false" onAction="#refresh" prefHeight="35.0" prefWidth="70.0" text="refresh" />
       <Button fx:id="fxoc" layoutX="350.0" layoutY="8.0" mnemonicParsing="false" onAction="#filter" prefHeight="25.0" prefWidth="215.0" text="filtrer par occasion" />
       <TextField fx:id="rech" layoutX="110.0" layoutY="8.0" promptText="recherche" />
+      <Button fx:id="fac" layoutX="17.0" layoutY="305.0" mnemonicParsing="false" onAction="#facture" text="facture" />
    </children>
 </AnchorPane>

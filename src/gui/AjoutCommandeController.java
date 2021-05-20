@@ -50,6 +50,11 @@ public class AjoutCommandeController implements Initializable {
 
     @FXML
     private void AjouterCommande(ActionEvent event) throws IOException, MessagingException {
+        if (tfRef.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"le champ est vide");
+        }
+        else
+        {
         servicecommande sc;
         sc = new servicecommande();
         sc.ajouter(new commande(tfRef.getText() ,tfEtat.getText() ));
@@ -64,6 +69,7 @@ public class AjoutCommandeController implements Initializable {
         prStage.setResizable(false);
         prStage.show();
 JavaMailUtil.sendMail("heni.guirat2@gmail.com");
+
     }
-    
+    }
 }

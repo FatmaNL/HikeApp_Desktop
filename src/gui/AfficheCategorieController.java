@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestionproduit.gui;
+package gui;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import gestionproduit.models.Categorie;
-import gestionproduit.models.Produit;
+import models.Categorie;
 import gestionproduit.utils.DataSource;
 import java.io.IOException;
 import java.net.URL;
@@ -42,43 +41,37 @@ import javafx.util.Callback;
  *
  * @author LENOVO
  */
-public class AfficheProduitController implements Initializable {
+public class AfficheCategorieController implements Initializable {
 
     @FXML
-    private TableView<Produit> table;
+    private TableView<Categorie> table;
     @FXML
-    private TableColumn<Produit, String> idprod;
+    private TableColumn<Categorie, String> idcat;
     @FXML
-    private TableColumn<Produit, String> nomprod;
+    private TableColumn<Categorie, String> nomcat;
     @FXML
-    private TableColumn<Produit, String> quanprod;
-    @FXML
-    private TableColumn<Produit, String> prixprod;
-    @FXML
-    private TableColumn<Produit, String> catprod;
-    @FXML
-    private TableColumn<Produit, String> editprod;
+    private TableColumn<Categorie, String> editcat;
 
     String query = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    Produit produit = null;
-
-    ObservableList<Produit> ProduitList = FXCollections.observableArrayList();
-
+    Connection connection = null ;
+    PreparedStatement preparedStatement = null ;
+    ResultSet resultSet = null ;
+    Categorie categorie = null ;
+    
+     ObservableList<Categorie>  CategorieList = FXCollections.observableArrayList();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadDate();
-    }
+    }    
 
     @FXML
     private void ajout(MouseEvent event) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("AjoutProduit.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("AjoutCategorie.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -92,43 +85,39 @@ public class AfficheProduitController implements Initializable {
 
     @FXML
     private void refresh() {
-        try {
-            ProduitList.clear();
-
-            query = "SELECT * FROM `produit`";
+         try {
+            CategorieList.clear();
+            
+            query = "SELECT * FROM `categorie`";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                ProduitList.add(new Produit(resultSet.getInt("numproduit"),
-                        resultSet.getString("nomproduit"),
-                        resultSet.getInt("quantite"),
-                        resultSet.getDouble("prix"),
-                        resultSet.getString("image"),
-                        resultSet.getString("cat_name")));
-                table.setItems(ProduitList);
-
+            
+            while (resultSet.next()){
+                CategorieList.add(new  Categorie(
+                        resultSet.getInt("idcategorie"),
+                        resultSet.getString("nomcategorie")));
+                table.setItems(CategorieList);
+                
             }
-
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(AfficheCategorieController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     private void loadDate() {
-        connection = DataSource.getInstance().getcnx();
-        refresh();
 
-        idprod.setCellValueFactory(new PropertyValueFactory<>("numproduit"));
-        nomprod.setCellValueFactory(new PropertyValueFactory<>("nomproduit"));
-        quanprod.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prixprod.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        catprod.setCellValueFactory(new PropertyValueFactory<>("nomcategorie"));
+        connection =DataSource.getInstance().getcnx();
+        refresh(); 
+        
+        idcat.setCellValueFactory(new PropertyValueFactory<>("idcategorie"));
+        nomcat.setCellValueFactory(new PropertyValueFactory<>("nomcategorie"));
         //add cell of button edit 
-        Callback<TableColumn<Produit, String>, TableCell<Produit, String>> cellFoctory = (TableColumn<Produit, String> param) -> {
+         Callback<TableColumn<Categorie, String>, TableCell<Categorie, String>> cellFoctory = (TableColumn<Categorie, String> param) -> {
             // make cell containing buttons
-            final TableCell<Produit, String> cell = new TableCell<Produit, String>() {
+            final TableCell<Categorie, String> cell = new TableCell<Categorie, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -153,42 +142,52 @@ public class AfficheProduitController implements Initializable {
                                 + "-fx-fill:#00E676;"
                         );
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-
+                            
                             try {
-                                produit = table.getSelectionModel().getSelectedItem();
-                                query = "DELETE FROM `produit` WHERE numproduit  =" + produit.getNumproduit();
-                                connection = DataSource.getInstance().getcnx();
+                                categorie = table.getSelectionModel().getSelectedItem();
+                                query = "DELETE FROM `categorie` WHERE idcategorie  ="+categorie.getIdcategorie();
+                                 connection =DataSource.getInstance().getcnx();
                                 preparedStatement = connection.prepareStatement(query);
                                 preparedStatement.execute();
                                 refresh();
-
+                                
                             } catch (SQLException ex) {
                                 Logger.getLogger(AfficheCategorieController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
+                           
+
+                          
 
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
-
-                            produit = table.getSelectionModel().getSelectedItem();
-                            FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("AjoutProduit.fxml"));
+                            
+                            categorie = table.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader ();
+                            loader.setLocation(getClass().getResource("AjoutCategorie.fxml"));
                             try {
                                 loader.load();
+                                
                             } catch (IOException ex) {
                                 Logger.getLogger(AfficheCategorieController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
-                            AjoutProduitController addProduitController = loader.getController();
-                            addProduitController.setUpdate(true);
-                            addProduitController.setTextField(produit.getNumproduit(), produit.getNomproduit(), produit.getQuantite(), produit.getPrix());
+                            
+                            AjoutCategorieController addCategorieController = loader.getController();
+                            addCategorieController.setUpdate(true);
+                            addCategorieController.setTextField(categorie.getIdcategorie(), categorie.getNomcategorie());
                             Parent parent = loader.getRoot();
                             Stage stage = new Stage();
                             stage.setScene(new Scene(parent));
                             stage.initStyle(StageStyle.UTILITY);
                             stage.show();
+                            
+                            
+
+                           
 
                         });
                         refresh();
+
                         HBox managebtn = new HBox(editIcon, deleteIcon);
                         managebtn.setStyle("-fx-alignment:center");
                         HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
@@ -205,8 +204,9 @@ public class AfficheProduitController implements Initializable {
 
             return cell;
         };
-        editprod.setCellFactory(cellFoctory);
-        table.setItems(ProduitList);
+         editcat.setCellFactory(cellFoctory);
+         table.setItems(CategorieList);
+         
     }
-
+    
 }

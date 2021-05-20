@@ -5,6 +5,7 @@
  */
 package tests;
 
+import gui.AfficheProduitController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,15 +22,17 @@ import javafx.stage.Stage;
  * @author Asus
  */
 public class mainGUI extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/afficheCommande.fxml"));
-       Parent root = loader.load();
-       Scene scene = new Scene(root);
-       primaryStage.setTitle("HikeApp");
-       primaryStage.setScene(scene);
-       primaryStage.show();
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/afficheProduit.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/favorisView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/afficheCommande.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("HikeApp");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
@@ -38,5 +41,5 @@ public class mainGUI extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

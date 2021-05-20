@@ -1,12 +1,13 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestionproduit.services;
+package services;
 
-import gestionproduit.models.Categorie;
-import gestionproduit.models.Produit;
+import services.IService2;
+import models.Categorie;
 import gestionproduit.utils.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,16 +20,17 @@ import java.util.List;
  *
  * @author LENOVO
  */
-public class ServiceProduit implements IService<Produit>{
-    Connection cnx = DataSource.getInstance().getcnx();
+public class ServiceCategorie implements IService2<Categorie> {
 
+     Connection cnx = DataSource.getInstance().getcnx();
+     
     @Override
-    public void ajouter(Produit t) {
-         try {
-            String requete = "INSERT INTO produit (nomproduit,quantite,prix,image,cat,cat_name) VALUES ('" + t.getNomproduit() + "','" + t.getQuantite()+"','" + t.getPrix()+"','" + t.getImage()+"','" + t.getNomcategorie()+"')";
+    public void ajouter(Categorie t) {
+        try {
+            String requete = "INSERT INTO categorie (nomcategorie) VALUES ('" + t.getNomcategorie() + "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
-            System.out.println("produit ajoutée !");
+            System.out.println("Categorie ajoutée !");
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -36,9 +38,9 @@ public class ServiceProduit implements IService<Produit>{
     }
 
     @Override
-    public void modifier(Produit t) {
-       try {
-            String requete = "UPDATE produit SET nomproduit='" +t.getNomproduit()+"',quantite='"+t.getQuantite()+ "',prix='"+t.getPrix()+"',image='"+t.getImage()+"',cat_name='"+t.getNomcategorie()+"' WHERE id=" + t.getNumproduit();
+    public void modifier(Categorie t) {
+        try {
+            String requete = "UPDATE categorie SET nomcategorie='" + t.getNomcategorie()+ "' WHERE idcategorie=" + t.getIdcategorie();
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Categorie modifiée !");
@@ -46,12 +48,13 @@ public class ServiceProduit implements IService<Produit>{
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+
     }
 
     @Override
-    public void supprimer(Produit t) {
+    public void supprimer(Categorie t) {
          try {
-            String requete = "DELETE FROM produit WHERE id=" + t.getNumproduit();
+            String requete = "DELETE FROM categorie WHERE idcategorie=" + t.getIdcategorie();
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("categorie supprimée !");
@@ -62,15 +65,15 @@ public class ServiceProduit implements IService<Produit>{
     }
 
     @Override
-    public List<Produit> afficher() {
-        List<Produit> list = new ArrayList<>();
+    public List<Categorie> afficher() {
+         List<Categorie> list = new ArrayList<>();
 
         try {
-            String requete = "SELECT * FROM produit";
+            String requete = "SELECT * FROM categorie";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                list.add(new Produit(rs.getInt("numproduit"),rs.getString("nomproduit"),rs.getInt("quantite"),rs.getDouble("prix"),rs.getString("image"),rs.getString("cat_name")));
+                list.add(new Categorie(rs.getInt("idcategorie"),rs.getString("nomcategorie")));
             }
 
         } catch (SQLException ex) {

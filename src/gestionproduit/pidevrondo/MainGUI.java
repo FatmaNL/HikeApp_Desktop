@@ -28,14 +28,13 @@ public class MainGUI extends Application {
     
     @Override
     public void start(Stage primaryStage)throws IOException {
+        //FXMLLoader Loader= new FXMLLoader(getClass().getResource("../gui/favorisView.fxml"));
         FXMLLoader Loader= new FXMLLoader(getClass().getResource("../gui/afficheProduit.fxml"));
-        Parent  root = Loader.load();
+        Parent root = Loader.load();
         Scene scene = new Scene(root);
-        
         primaryStage.setTitle("PIDEV");
         primaryStage.setScene(scene);
         primaryStage.show();
-        
     }
 
     /**

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionproduit.gui.AfficheProduitController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AfficheProduitController">
    <children>
       <Text layoutX="43.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Produits">
          <font>
@@ -18,14 +18,14 @@
          </font>
       </Text>
       <Pane layoutX="93.0" layoutY="59.0" prefHeight="3.0" prefWidth="486.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <TableView fx:id="table" layoutX="15.0" layoutY="148.0" prefHeight="228.0" prefWidth="677.0">
+      <TableView fx:id="table" layoutX="13.0" layoutY="147.0" prefHeight="228.0" prefWidth="699.0">
         <columns>
           <TableColumn fx:id="idprod" prefWidth="120.0" text="IdProduit" />
           <TableColumn fx:id="nomprod" prefWidth="120.0" text="NomProduit" />
             <TableColumn fx:id="quanprod" prefWidth="120.0" text="Quantité" />
             <TableColumn fx:id="prixprod" prefWidth="120.0" text="Prix" />
             <TableColumn fx:id="catprod" prefWidth="120.0" text="Categorie" />
-            <TableColumn fx:id="editprod" prefWidth="75.0" />
+            <TableColumn fx:id="editprod" prefWidth="97.0" />
         </columns>
       </TableView>
       <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="75.0" prefHeight="61.0" prefWidth="168.0">

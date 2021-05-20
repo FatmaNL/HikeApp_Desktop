@@ -90,8 +90,10 @@ public class servicecommande implements IService<commande>{
             String requete = "SELECT * FROM commande";
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
+            
             while (rs.next()) {
                 list.add(new commande( rs.getString(1), rs.getString("etat")) );
+                
             }
 
         } catch (SQLException ex) {
@@ -99,6 +101,7 @@ public class servicecommande implements IService<commande>{
         }
 
         return list;
+        
     }
 public List<commande> afficheroccasion(){
          List<commande> list = new ArrayList<>();

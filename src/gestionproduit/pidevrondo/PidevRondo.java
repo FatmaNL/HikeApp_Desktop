@@ -5,10 +5,10 @@
  */
 package gestionproduit.pidevrondo;
 
-import gestionproduit.models.Categorie;
-import gestionproduit.models.Produit;
-import gestionproduit.services.ServiceCategorie;
-import gestionproduit.services.ServiceProduit;
+import models.Categorie;
+import models.Produit;
+import services.ServiceCategorie;
+import services.ServiceProduit;
 import gestionproduit.utils.DataSource;
 
 /**
@@ -31,7 +31,7 @@ public class PidevRondo {
         sp.afficher().forEach(System.out::println);*/
         
         ServiceProduit sp = new ServiceProduit();
-        sp.ajouter(new Produit("tente",4,12.35,"","nike"));
+        /*sp.ajouter(new Produit("tentee",4,12.35,"","nikee"));*/
         sp.afficher().forEach(System.out::println);
 
          
