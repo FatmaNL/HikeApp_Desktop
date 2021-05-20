@@ -46,8 +46,7 @@ public class AfficheProduitController implements Initializable {
 
     @FXML
     private TableView<Produit> table;
-    @FXML
-    private TableColumn<Produit, String> idprod;
+
     @FXML
     private TableColumn<Produit, String> nomprod;
     @FXML
@@ -120,7 +119,7 @@ public class AfficheProduitController implements Initializable {
         connection = DataSource.getInstance().getcnx();
         refresh();
 
-        idprod.setCellValueFactory(new PropertyValueFactory<>("numproduit"));
+
         nomprod.setCellValueFactory(new PropertyValueFactory<>("nomproduit"));
         quanprod.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         prixprod.setCellValueFactory(new PropertyValueFactory<>("prix"));

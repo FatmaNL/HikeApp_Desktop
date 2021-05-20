@@ -46,8 +46,6 @@ public class AfficheCategorieController implements Initializable {
     @FXML
     private TableView<Categorie> table;
     @FXML
-    private TableColumn<Categorie, String> idcat;
-    @FXML
     private TableColumn<Categorie, String> nomcat;
     @FXML
     private TableColumn<Categorie, String> editcat;
@@ -112,7 +110,7 @@ public class AfficheCategorieController implements Initializable {
         connection =DataSource.getInstance().getcnx();
         refresh(); 
         
-        idcat.setCellValueFactory(new PropertyValueFactory<>("idcategorie"));
+
         nomcat.setCellValueFactory(new PropertyValueFactory<>("nomcategorie"));
         //add cell of button edit 
          Callback<TableColumn<Categorie, String>, TableCell<Categorie, String>> cellFoctory = (TableColumn<Categorie, String> param) -> {

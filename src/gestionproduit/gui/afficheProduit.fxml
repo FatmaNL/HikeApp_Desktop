@@ -18,9 +18,8 @@
          </font>
       </Text>
       <Pane layoutX="93.0" layoutY="59.0" prefHeight="3.0" prefWidth="486.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <TableView fx:id="table" layoutX="15.0" layoutY="148.0" prefHeight="228.0" prefWidth="677.0">
+      <TableView fx:id="table" layoutX="63.0" layoutY="149.0" prefHeight="228.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="idprod" prefWidth="120.0" text="IdProduit" />
           <TableColumn fx:id="nomprod" prefWidth="120.0" text="NomProduit" />
             <TableColumn fx:id="quanprod" prefWidth="120.0" text="Quantité" />
             <TableColumn fx:id="prixprod" prefWidth="120.0" text="Prix" />
@@ -28,14 +27,13 @@
             <TableColumn fx:id="editprod" prefWidth="75.0" />
         </columns>
       </TableView>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="75.0" prefHeight="61.0" prefWidth="168.0">
+      <HBox alignment="CENTER_LEFT" layoutX="63.0" layoutY="74.0" prefHeight="61.0" prefWidth="168.0">
          <children>
             <FontAwesomeIconView fill="#230fda" glyphName="PLUS_SQUARE" onMouseClicked="#ajout" size="40" text="">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
             </FontAwesomeIconView>
-            <FontAwesomeIconView fill="#11c911" glyphName="REFRESH" onMouseClicked="#refresh" size="40" />
          </children>
       </HBox>
    </children>

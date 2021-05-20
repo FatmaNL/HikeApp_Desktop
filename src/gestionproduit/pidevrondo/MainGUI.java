@@ -28,6 +28,7 @@ public class MainGUI extends Application {
     
     @Override
     public void start(Stage primaryStage)throws IOException {
+        
         FXMLLoader Loader= new FXMLLoader(getClass().getResource("../gui/afficheProduit.fxml"));
         Parent  root = Loader.load();
         Scene scene = new Scene(root);
