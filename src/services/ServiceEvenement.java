@@ -49,7 +49,7 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
                 String type = rs.getString("type");
                 String circuit = rs.getString("circuit");
                 String image = rs.getString("image");
-                int idTransport = rs.getInt("transport_id");
+                int idTransport = rs.getInt("id_transport");
                 Evenement e = new Evenement(id, nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit, image, idTransport);
                 EvenementList.add(e);
             }
@@ -63,7 +63,7 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
     @Override
     public void ajouter(Evenement x) {
         try {
-            String requete = "INSERT INTO evenement (nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit, transport_id) "
+            String requete = "INSERT INTO evenement (nomevenement, depart, destination, nbparticipant, dateevenement, duree, prix, programme, contact, infos, type, circuit, id_transport) "
                     + "VALUES ('" + x.getNomevenement()+ "','" + x.getDepart()+ "','" + x.getDestination()+ "','" + x.getNbparticipant()+ "','" + x.getDateevenement()+ "','" + x.getDuree()+  "','" + x.getPrix()+  "','" + x.getProgramme()+  "','" + x.getContact()+  "','" + x.getInfos()+  "','" + x.getType()+  "','" + x.getCircuit()+ "','" + x.getIdTransport()+ "')";
             
             Statement st = cnx.createStatement();
@@ -94,7 +94,7 @@ public class ServiceEvenement implements IServiceEvenement<Evenement> {
             String requete = "UPDATE evenement SET nomevenement='" + x.getNomevenement()+ "',depart='" + x.getDepart()+ "',destination='" + x.getDestination()
                     + "',nbparticipant='" + x.getNbparticipant()+ "',dateevenement='" + x.getDateevenement()+ "',duree='" + x.getDuree()
                     + "',prix='" + x.getPrix()+ "',programme='" + x.getProgramme()+ "',contact='" + x.getContact()+ "',infos='" + x.getInfos()
-                    + "',type='" + x.getType()+ "',circuit='" + x.getCircuit()+ "',transport_id='" + x.getIdTransport()
+                    + "',type='" + x.getType()+ "',circuit='" + x.getCircuit()+ "',id_transport='" + x.getIdTransport()
                     +"' WHERE id=" + x.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
