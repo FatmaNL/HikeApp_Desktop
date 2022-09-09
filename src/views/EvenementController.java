@@ -5,17 +5,28 @@
  */
 package views;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Evenement;
 import entities.Sentier;
 import entities.Transport;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -58,6 +69,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import services.ServiceEvenement;
 import services.ServiceSentier;
 import services.ServiceTransport;
@@ -384,6 +396,157 @@ public class EvenementController implements Initializable {
 
     @FXML
     private void Exporter(ActionEvent event) {
+        Document document = new Document();
+      try
+      {
+         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+         document.open();
+         document.add(new Paragraph("A Hello World PDF document."));
+         document.close();
+         writer.close();
+        System.out.println("pdf!");
+      } catch (DocumentException | FileNotFoundException e)
+      {
+      }
+//        String path = "";
+//        JFileChooser j= new JFileChooser();
+//        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        path=j.getSelectedFile().getPath();
+//        Document doc = new Document();
+//        try {
+//            PdfWriter.getInstance(doc, new FileOutputStream(path+"abc.pdf"));
+//            doc.open();
+//            PdfPTable tab = new PdfPTable(5);
+//            tab.addCell("Evenement");
+//            tab.addCell("Depart");
+//            tab.addCell("Destination");
+//            tab.addCell("Participants");
+//            tab.addCell("Prix");
+//            for (int i = 0; i < tableview.getrow; i++) {
+//
+//            }
+//        } catch (Exception e) {
+//        }
+//        try {
+//           //Class.forName("com.mysql.jdbc.Driver");
+//               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pidev?serverTimezone=UTC", "root", "");
+//            Statement stmt = con.createStatement();
+//                    /* Define the SQL query */
+//                    ResultSet query_set = stmt.executeQuery("SELECT *From evenement");
+//                    /* Step-2: Initialize PDF documents - logical objects */
+//                    Document my_pdf_report = new Document();
+//                    PdfWriter.getInstance(my_pdf_report, new FileOutputStream("mesevenements.pdf"));
+//                    my_pdf_report.open();
+//                    //we have four columns in our table
+//                    PdfPTable my_report_table = new PdfPTable(4);
+//                    //create a cell object
+//                    PdfPCell table_cell;
+//
+//                    while (query_set.next()) {
+//                                    String dept_id = query_set.getString("nomevenement");
+//                                    table_cell=new PdfPCell(new Phrase(dept_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    String dept_name=query_set.getString("depart");
+//                                    table_cell=new PdfPCell(new Phrase(dept_name));
+//                                    my_report_table.addCell(table_cell);
+//                                    String manager_id=query_set.getString("destination");
+//                                    table_cell=new PdfPCell(new Phrase(manager_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    String location_id=query_set.getString("infos");
+//                                    table_cell=new PdfPCell(new Phrase(location_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    }
+//                    /* Attach report table to PDF */
+//                    my_pdf_report.add(my_report_table);
+//                    my_pdf_report.close();
+//
+//                    /* Close all DB related objects */
+//                    query_set.close();
+//                    stmt.close();
+//                    con.close();
+//
+//                    System.out.println("pdf gen!");
+//
+//
+//
+//    } catch (FileNotFoundException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//    } catch (DocumentException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//    }
+        
+//        String path = "";
+//        JFileChooser j= new JFileChooser();
+//        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        path=j.getSelectedFile().getPath();
+//        Document doc = new Document();
+//        try {
+//            PdfWriter.getInstance(doc, new FileOutputStream(path+"abc.pdf"));
+//            doc.open();
+//            PdfPTable tab = new PdfPTable(5);
+//            tab.addCell("Evenement");
+//            tab.addCell("Depart");
+//            tab.addCell("Destination");
+//            tab.addCell("Participants");
+//            tab.addCell("Prix");
+//            for (int i = 0; i < tableview.getrow; i++) {
+//                
+//            }
+//        } catch (Exception e) {
+//        }
+
+           
+//        try {
+//           //Class.forName("com.mysql.jdbc.Driver");
+//               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pidev?serverTimezone=UTC", "root", "");
+//            Statement stmt = con.createStatement();
+//                    /* Define the SQL query */
+//                    ResultSet query_set = stmt.executeQuery("SELECT *From evenement");
+//                    /* Step-2: Initialize PDF documents - logical objects */
+//                    Document my_pdf_report = new Document();
+//                    PdfWriter.getInstance(my_pdf_report, new FileOutputStream("mesevenements.pdf"));
+//                    my_pdf_report.open();            
+//                    //we have four columns in our table
+//                    PdfPTable my_report_table = new PdfPTable(4);
+//                    //create a cell object
+//                    PdfPCell table_cell;
+//
+//                    while (query_set.next()) {                
+//                                    String dept_id = query_set.getString("nomevenement");
+//                                    table_cell=new PdfPCell(new Phrase(dept_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    String dept_name=query_set.getString("depart");
+//                                    table_cell=new PdfPCell(new Phrase(dept_name));
+//                                    my_report_table.addCell(table_cell);
+//                                    String manager_id=query_set.getString("destination");
+//                                    table_cell=new PdfPCell(new Phrase(manager_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    String location_id=query_set.getString("infos");
+//                                    table_cell=new PdfPCell(new Phrase(location_id));
+//                                    my_report_table.addCell(table_cell);
+//                                    }
+//                    /* Attach report table to PDF */
+//                    my_pdf_report.add(my_report_table);                       
+//                    my_pdf_report.close();
+//
+//                    /* Close all DB related objects */
+//                    query_set.close();
+//                    stmt.close(); 
+//                    con.close();       
+//                    
+//                    System.out.println("pdf gen!");
+//
+//
+//
+//    } catch (FileNotFoundException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//    } catch (DocumentException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//    }
         
         
     }

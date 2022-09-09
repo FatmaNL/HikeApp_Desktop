@@ -52,7 +52,7 @@ public class MailingController implements Initializable {
         String fromemail = "fatma.naili@esprit.tn";
 
         String Subject = "Invitation";
-        String emailpassword = "203JFT3639";//your email password
+        String emailpassword = "esprit2022Su";//your email password
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
