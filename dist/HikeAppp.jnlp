@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="HikeAppp.jnlp">
+  <information>
+    <title>HikeAppp</title>
+    <vendor>Fatma NL</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="HikeAppp.jar" size="40626" download="eager" />
+    <jar href="lib\itextpdf-5.3.4.jar" size="1810038" download="eager" />
+    <jar href="lib\javax.mail.jar" size="434923" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.19.jar" size="2356711" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="test.FXMain"  name="HikeAppp" />
+  <update check="always"/>
+</jnlp>
